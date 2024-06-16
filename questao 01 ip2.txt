@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 1
+
+typedef struct {
+    char hora[5];
+    char minuto[5];
+    char segundo[5];
+} Horario;
+
+typedef struct {
+    char dia[5];
+    char mes[5];
+    char ano[6];
+    char compromisso[164];
+} Data;
+
+void Compromisso(Data *d, Horario *h) {
+    int i;
+    
+    for (i = 0; i < MAX; i++) {
+        printf("\nInforme seu compromisso: ");
+        getchar();
+        fgets(d[i].compromisso, sizeof(d[i].compromisso), stdin);
+    } 
+}
+int main() {
+    Horario h[MAX];
+    Data d[MAX];
+    int i;
+    
+    for (i = 0; i < MAX; i++) {
+        printf("\nInforme a hora: ");
+        scanf("%s", h[i].hora);
+        
+        printf("Informe o minuto: ");
+        scanf("%s", h[i].minuto);
+        
+        printf("Informe o segundo: ");
+        scanf("%s", h[i].segundo);
+        
+        printf("\nInforme o dia: ");
+        scanf("%s", d[i].dia);
+        
+        printf("Informe o mes: ");
+        scanf("%s", d[i].mes);
+        
+        if (atoi(d[i].mes) < 1 || atoi(d[i].mes) > 12) {
+            printf("MES INVALIDO!\n");
+            printf("Informe o mes: ");
+            scanf("%s", d[i].mes);
+        }
+        printf("Informe o ano: ");
+        scanf("%s", d[i].ano);
+    }  
+    Compromisso(d, h);
+    
+    for (i = 0; i < MAX; i++) {
+        printf("\nCompromisso: %s", d[i].compromisso);
+        printf("Horario: %s:%s:%s\n", h[i].hora, h[i].minuto, h[i].segundo);
+        printf("Data: %s/%s/%s\n", d[i].dia, d[i].mes, d[i].ano);
+    }
+    
+    return 0;
+}
